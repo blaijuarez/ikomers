@@ -26,7 +26,6 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="registro" element={<Registro />} />
       </Routes>
-      <div>Aquí hay cosas</div>
     </Layout>
   );
 }

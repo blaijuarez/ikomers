@@ -9,7 +9,7 @@ const LogoStyled = styled.h2`
   a {
     font-weight: bold;
     font-size: xxx-large;
-    color: green;
+    color: #ec52a7;
     text-decoration: none;
   }
 `;
@@ -18,7 +18,14 @@ const ContainerStyled = styled.div`
   max-width: 100%;
   width: 100vw;
   padding: 10px 0 0;
-  background-color: red;
+  background-color: #414141;
+`;
+
+const ItemsColStyled = styled(Col)`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 30px;
 `;
 
 const Header = () => {
@@ -31,10 +38,10 @@ const Header = () => {
               <a href="#">iKomers</a>
             </LogoStyled>
           </Col>
-          <Col>
+          <ItemsColStyled>
             <LoginMenu />
             <CarritoMenu />
-          </Col>
+          </ItemsColStyled>
         </Row>
       </Container>
       <Menu />

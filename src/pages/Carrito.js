@@ -1,20 +1,42 @@
-import React from "react";
-import { Card, Col, Container, Form, Row, Stack } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import {
+  Button,
+  Card,
+  Col,
+  Container,
+  Form,
+  Row,
+  Stack,
+} from "react-bootstrap";
 import { useCarrito, useProductos } from "../hooks";
 
 const Carrito = () => {
-  const { carrito } = useCarrito();
+  const [total, setTotal] = useState(0);
+  const { carrito, add, remove } = useCarrito();
   const { getProductoById } = useProductos();
+
+  useEffect(() => {
+    const calcularTotal = carrito.reduce((acc, { id, cantidad }) => {
+      const { price } = getProductoById(id);
+      const parsePrice = parseInt(price, 10);
+      return parsePrice * cantidad + acc;
+    }, 0);
+    setTotal(calcularTotal);
+  }, [carrito]);
 
   if (!carrito.length) return "No tienes productos en la cesta";
 
-  const handlerChange = () => "";
+  const handlerChange = (id, { target }) => {
+    const { selectedIndex } = target;
+    const { value: cantidad } = target[selectedIndex];
+    add({ id, cantidad });
+  };
 
-  const handlerRemove = () => "";
+  const handlerRemove = (id) => remove(id);
 
   return (
     <Container className="mt-5">
-      <Row>
+      <Row xs={1} md={1} className="g-4">
         {carrito.map(({ id, cantidad }) => {
           const { image, price, title } = getProductoById(id);
 
@@ -23,7 +45,7 @@ const Carrito = () => {
               <Card>
                 <Card.Body>
                   <Row>
-                    <Col>
+                    <Col xs={3}>
                       <Card.Img variant="top" src={image} />
                     </Col>
                     <Col>
@@ -31,14 +53,21 @@ const Carrito = () => {
                       <Card.Title>{price}€</Card.Title>
                       <Stack>
                         <div>Cantidad:</div>
-                        <Form.Select size="sm" onChange={handlerChange}>
-                          <option value="1">1</option>
+                        <Form.Select
+                          size="sm"
+                          defaultValue={cantidad}
+                          onChange={handlerChange.bind(this, id)}
+                        >
+                          <option value={"1"}>1</option>
                           <option value="2">2</option>
                           <option value="3">3</option>
                           <option value="4">4</option>
                         </Form.Select>
                         <div className="vr" />
-                        <Card.Link href="#" onClick={handlerRemove}>
+                        <Card.Link
+                          href="#"
+                          onClick={handlerRemove.bind(this, id)}
+                        >
                           Eliminar
                         </Card.Link>
                       </Stack>
@@ -49,6 +78,15 @@ const Carrito = () => {
             </Col>
           );
         })}
+      </Row>
+      <Row>
+        <Col>
+          <h4>
+            <b>Subtotal</b> productos({carrito.length}) <b>:</b>
+          </h4>
+          <h3>{total}€</h3>
+          <Button variant="secondary">Tramitar pedido</Button>
+        </Col>
       </Row>
     </Container>
   );

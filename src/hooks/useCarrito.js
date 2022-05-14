@@ -14,7 +14,10 @@ const useCarrito = () => {
     setCarritoContext([...data, newCarrito]);
   };
 
-  const remove = (id) => "";
+  const remove = (id) => {
+    const data = carrito.filter(({ id: _id }) => id !== _id);
+    setCarritoContext([...data]);
+  };
 
   return {
     carrito,

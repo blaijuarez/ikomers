@@ -18,8 +18,11 @@ const useProductos = () => {
     }
   }, [productContext, setProductContext]);
 
+  const getProductoById = (_id) => productos.find(({ id }) => id === _id);
+
   return {
     productos,
+    getProductoById,
   };
 };
 

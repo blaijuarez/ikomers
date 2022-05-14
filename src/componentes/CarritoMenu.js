@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Badge } from "react-bootstrap";
 import { MdOutlineShoppingCart } from "react-icons/md";
 
+import useCarrito from "../hooks/useCarrito";
+
 const Wrapper = styled.div`
   position: relative;
   a {
@@ -17,10 +19,12 @@ const Wrapper = styled.div`
 `;
 
 const CarritoMenu = () => {
+  const { carrito } = useCarrito();
+
   return (
     <Wrapper>
       <Badge pill bg="danger" text="light">
-        2
+        {carrito.length}
       </Badge>
       <Link to="/carrito">
         <MdOutlineShoppingCart

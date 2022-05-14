@@ -1,13 +1,18 @@
 import React from "react";
 import { Card, Stack } from "react-bootstrap";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
+import { Link } from "react-router-dom";
 
-const FichaProducto = ({ image, title, price }) => {
+const FichaProducto = ({ id, image, title, price }) => {
   return (
-    <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src={image} />
-      <Card.Body>
-        <Card.Title>{title}</Card.Title>
+    <Card>
+      <Link to={`detalle/${id}`}>
+        <Card.Img variant="top" src={image} />
+        <Card.Body>
+          <Card.Title>{title}</Card.Title>
+        </Card.Body>
+      </Link>
+      <Card.Footer>
         <Stack direction="horizontal" gap={3}>
           <Card.Text>{price}€</Card.Text>
           <MdOutlineAddShoppingCart
@@ -15,7 +20,7 @@ const FichaProducto = ({ image, title, price }) => {
             style={{ fontSize: "40px" }}
           />
         </Stack>
-      </Card.Body>
+      </Card.Footer>
     </Card>
   );
 };

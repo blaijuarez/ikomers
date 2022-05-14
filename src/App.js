@@ -18,7 +18,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Listado />} />
-        <Route path="detalle" element={<Detalle />} />
+        <Route path="detalle/:id" element={<Detalle />} />
         <Route path="contacto" element={<Contacto />} />
         <Route path="carrito" element={<Carrito />} />
         <Route path="editar" element={<Editar />} />

@@ -1,17 +1,20 @@
 import React from "react";
-import { Button, Card } from "react-bootstrap";
+import { Card, Stack } from "react-bootstrap";
+import { MdOutlineAddShoppingCart } from "react-icons/md";
 
-const FichaProducto = () => {
+const FichaProducto = ({ image, title, price }) => {
   return (
     <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src="holder.js/100px180" />
+      <Card.Img variant="top" src={image} />
       <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+        <Card.Title>{title}</Card.Title>
+        <Stack direction="horizontal" gap={3}>
+          <Card.Text>{price}€</Card.Text>
+          <MdOutlineAddShoppingCart
+            className="ms-auto"
+            style={{ fontSize: "40px" }}
+          />
+        </Stack>
       </Card.Body>
     </Card>
   );

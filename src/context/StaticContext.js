@@ -5,7 +5,7 @@ const Context = createContext({});
 export const StaticContext = ({ children }) => {
   const [productContext, setProductContext] = useState([]);
   const [carritoContext, setCarritoContext] = useState([]);
-  const [usuarioContext, setUsuarioContext] = useState([]);
+  const [usuarioContext, setUsuarioContext] = useState(null);
 
   return (
     <Context.Provider

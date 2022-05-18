@@ -25,7 +25,6 @@ const LoginMenu = () => {
   const { usuario } = useUsuario();
 
   if (usuario && usuario.id) {
-    console.log(usuario);
     return (
       <LoginStyled direction="horizontal" gap={1}>
         <div className="text-light">{usuario.name}</div>

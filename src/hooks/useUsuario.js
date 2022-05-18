@@ -7,8 +7,14 @@ const useUsuario = () => {
   const { usuarioContext, setUsuarioContext } = useContext(StaticContext);
 
   useEffect(() => {
+    function checkLogin() {
+      const _usuario = localStorage.getItem("usuario");
+      _usuario && setUsuarioContext(JSON.parse(_usuario));
+    }
+
+    !usuarioContext && checkLogin();
     usuarioContext && setUsuario(usuarioContext);
-  }, [usuarioContext]);
+  }, [setUsuarioContext, usuarioContext]);
 
   const add = async ({ email, isAdmin, password }) => {
     try {
@@ -25,10 +31,17 @@ const useUsuario = () => {
       const _usuario = allUsuarios.find(
         (usuarios) => email === usuarios.email && password === usuarios.password
       );
-      _usuario && setUsuarioContext(_usuario);
+      if (_usuario) {
+        setUsuarioContext(_usuario);
+        persistirUsuario(_usuario);
+      }
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const persistirUsuario = (_usuario) => {
+    localStorage.setItem("usuario", JSON.stringify(_usuario));
   };
 
   return {

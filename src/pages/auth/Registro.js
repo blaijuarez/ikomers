@@ -11,6 +11,8 @@ import {
   Form,
   Row,
 } from "react-bootstrap";
+import { useUsuario } from "../../hooks";
+import { Navigate } from "react-router-dom";
 
 const schema = yup.object().shape({
   email: yup.string().required().email(),
@@ -26,10 +28,9 @@ const schema = yup.object().shape({
 });
 
 const Registro = () => {
-  const save = (datos) => {
-    debugger;
-    console.log(datos);
-  };
+  const { usuario, add } = useUsuario();
+
+  if (usuario && usuario.id) return <Navigate to="/" replace={true} />;
 
   return (
     <Container>
@@ -39,7 +40,7 @@ const Registro = () => {
             <Card.Body>
               <Card.Title>Registro</Card.Title>
               <Formik
-                onSubmit={save}
+                onSubmit={add}
                 validationSchema={schema}
                 initialValues={{
                   email: "",

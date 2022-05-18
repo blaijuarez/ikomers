@@ -8,7 +8,7 @@ const api = axios.create({
   baseURL,
 });
 
-const get = () => api.get();
+const get = () => api.get(`/${endpoint}`);
 
 const add = (data) => api.post(`/${endpoint}`, data);
 

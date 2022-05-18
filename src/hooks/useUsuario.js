@@ -19,9 +19,22 @@ const useUsuario = () => {
     }
   };
 
+  const login = async ({ email, password }) => {
+    try {
+      const { data: allUsuarios } = await usuarioApi.get();
+      const _usuario = allUsuarios.find(
+        (usuarios) => email === usuarios.email && password === usuarios.password
+      );
+      _usuario && setUsuarioContext(_usuario);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return {
     usuario,
     add,
+    login,
   };
 };
 

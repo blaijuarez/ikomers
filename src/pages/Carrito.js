@@ -22,7 +22,7 @@ const Carrito = () => {
       return parsePrice * cantidad + acc;
     }, 0);
     setTotal(calcularTotal);
-  }, [carrito]);
+  }, [carrito, getProductoById]);
 
   if (!carrito.length) return "No tienes productos en la cesta";
 

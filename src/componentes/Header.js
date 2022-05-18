@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Col, Container, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import CarritoMenu from "./CarritoMenu";
 import LoginMenu from "./LoginMenu";
@@ -35,7 +36,7 @@ const Header = () => {
         <Row>
           <Col sm={3}>
             <LogoStyled>
-              <a href="#">iKomers</a>
+              <Link to="/">iKomers</Link>
             </LogoStyled>
           </Col>
           <ItemsColStyled>

@@ -1,22 +1,22 @@
-import { useContext, useEffect, useState } from "react";
-import Context from "../context/StaticContext";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 const useCarrito = () => {
   const [carrito, setCarrito] = useState([]);
-  const { carritoContext, setCarritoContext } = useContext(Context);
+
+  const carritoRedux = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setCarrito(carritoContext);
-  }, [carritoContext]);
+    setCarrito(carritoRedux);
+  }, [carritoRedux]);
 
   const add = (newCarrito) => {
-    const data = carrito.filter(({ id }) => id !== newCarrito.id);
-    setCarritoContext([...data, newCarrito]);
+    dispatch({ type: "@carrito/add", payload: newCarrito });
   };
 
   const remove = (id) => {
-    const data = carrito.filter(({ id: _id }) => id !== _id);
-    setCarritoContext([...data]);
+    dispatch({ type: "@carrito/remove", payload: id });
   };
 
   return {

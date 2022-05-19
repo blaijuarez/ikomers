@@ -20,9 +20,19 @@ const useProductos = () => {
 
   const getProductoById = (_id) => productos.find(({ id }) => id === _id);
 
+  const addProduct = async (producto) => {
+    try {
+      const { data } = await productosApi.add(producto);
+      setProductContext([...productos, data]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return {
     productos,
     getProductoById,
+    addProduct,
   };
 };
 

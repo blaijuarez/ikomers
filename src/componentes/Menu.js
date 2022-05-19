@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { useUsuario } from "../hooks";
 
 const Wraper = styled.nav`
   width: 100%;
@@ -30,6 +31,8 @@ const Wraper = styled.nav`
 `;
 
 const Menu = () => {
+  const { usuario } = useUsuario();
+
   return (
     <Wraper>
       <ul>
@@ -39,9 +42,13 @@ const Menu = () => {
         <li>
           <NavLink to="contacto">Contacto</NavLink>
         </li>
-        <li>
-          <NavLink to="nuevo">Administrar</NavLink>
-        </li>
+        {usuario && usuario.id ? (
+          <li>
+            <NavLink to="nuevo">Administrar</NavLink>
+          </li>
+        ) : (
+          ""
+        )}
       </ul>
     </Wraper>
   );

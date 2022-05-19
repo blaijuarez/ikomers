@@ -5,12 +5,16 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import { StaticContext } from "./context/StaticContext";
-import { legacy_createStore as createStore } from "redux";
+import { legacy_createStore as createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 
-import carritoReducer from "./reducers/carrito";
+import { productos, carrito } from "./reducers";
 
-const store = createStore(carritoReducer);
+const reducers = combineReducers({
+  productos,
+  carrito,
+});
+const store = createStore(reducers);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

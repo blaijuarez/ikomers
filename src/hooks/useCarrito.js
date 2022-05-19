@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 const useCarrito = () => {
   const [carrito, setCarrito] = useState([]);
 
-  const carritoRedux = useSelector((state) => state);
+  const carritoRedux = useSelector((state) => state.carrito);
   const dispatch = useDispatch();
 
   useEffect(() => {
